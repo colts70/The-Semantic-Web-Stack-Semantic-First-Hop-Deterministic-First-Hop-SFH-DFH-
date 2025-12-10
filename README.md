@@ -5,9 +5,6 @@ A minimal semantic protocol for AI and the web — one file, five primitives, ze
 
 The Semantic Web Stack — Semantic First-Hop / Deterministic First-Hop (SFH / DFH)
 
-A minimal semantic protocol for AI and the web — one file, five primitives, zero dependencies.
-DFH/SFH provides a deterministic first-hop for meaning using JSON-LD to create a Public Semantic Layer (PSL) that AIs and search engines resolve before content.
-
 Core Principles
 
 One file.
