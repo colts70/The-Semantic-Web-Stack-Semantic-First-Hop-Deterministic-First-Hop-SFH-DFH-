@@ -1,6 +1,7 @@
 # The-Semantic-Web-Stack-Semantic-First-Hop-Deterministic-First-Hop-SFH-DFH-
-One file.   Five primitives.   Zero dependencies.   Pure JSON-LD.   Deterministic meaning.  This is the cleanest possible solution to one of the hardest problems in AI.
-The Semantic Web Stack & Semantic First-Hop / Deterministic First-Hop (SFH / DFH)
+
+A minimal semantic protocol for AI and the web — one file, five primitives, zero dependencies. DFH/SFH provides a deterministic first-hop for meaning using JSON-LD to create a public semantic layer that AIs and search engines can resolve before content.
+
 
 One file.  
 Five primitives.  
