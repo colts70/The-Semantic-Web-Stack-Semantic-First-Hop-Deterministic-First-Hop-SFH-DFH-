@@ -1,73 +1,82 @@
-The Semantic Web Stack — SFH / DFH
-A minimal semantic protocol for AI and the web — one file, five primitives, zero dependencies.
+DFH / SFH Specification — Version 1.0
+Deterministic First-Hop & Semantic First-Hop Protocol
+Status: Draft — Informational RFC
+Abstract
 
-SFH/DFH gives every domain on the internet a deterministic first-hop for meaning using a single JSON-LD anchor that AIs, search engines, and knowledge graphs resolve before crawling, ranking, embeddings, or reasoning.
+The Deterministic First-Hop (DFH) and Semantic First-Hop (SFH) protocol defines a minimal semantic layer for the public web.
+A single JSON-LD document located at /.well-known/stack or /.sfh.json provides deterministic, machine-readable declarations for identity, canonical routing, and semantic grounding.
 
-1. Core Principles & Position in the Stack
-One file
+The protocol introduces five mandatory primitives — /type, /entity, /url, /canonical, /sitemap — which form the authoritative first-hop for AI models, search engines, and knowledge graphs. DFH resolves identity deterministically; SFH binds semantic interpretation to the resolved primitives.
 
-A single, crawlable JSON-LD declaration located at:
+This document describes the v1.0 requirements, behaviors, error conditions, governance rules, and compliance obligations for a valid DFH/SFH declaration.
 
-/.well-known/stack
+1. Introduction
 
-or /.sfh.json
+Modern AI systems rely on probabilistic signals for entity resolution, leading to ambiguity, hallucination, and inconsistent grounding.
+DFH/SFH introduces a deterministic identity anchor for any domain by providing:
 
-Five primitives
+A single declarative JSON-LD file
 
-The universal semantic backbone:
+Five canonical primitives
 
-/type
+Deterministic identity resolution
 
-/entity
+A standardized semantic first-hop
 
-/url
+A unified routing point for sitemaps and structured content
 
-/canonical
+The goal is not to replace existing protocols (DNS, HTTP, Schema.org, or XML Sitemaps) but to bind them deterministically into a consistent first-hop suitable for AI reasoning.
 
-/sitemap
+2. Terminology
 
-Zero dependencies
+MUST, MUST NOT, SHOULD, MAY follow the definitions in RFC 2119.
 
-Pure JSON-LD. Static. Cacheable. Versionable. Platform-agnostic.
-No APIs, frameworks, or runtimes required.
+Stack File
+A JSON-LD document located at /.well-known/stack or /.sfh.json.
 
-Deterministic meaning
+Primitive
+One of the five mandatory semantic declarations.
 
-The stack file provides first-hop truth for identity and routing —
-before model reasoning, embeddings, heuristics, SEO signals, or interpretation.
+DFH
+Deterministic First-Hop — identity and routing resolution.
 
-Protocol Layering
-Transport → Hyperlink → Semantic → Content → Model
-DNS/TCP/IP → HTTP/URL → DFH/SFH → Web/API → AI/KG
+SFH
+Semantic First-Hop — interpretation anchored to loaded primitives.
 
+KG
+Knowledge Graph.
 
-DFH/SFH inserts the missing semantic layer between URL routing and content.
+Entity Collision
+Two or more semantic interpretations resolving to the same lexical form.
 
-2. The Five Canonical Primitives
-/type
+3. File Location
 
-Declares what the domain represents
-(e.g., Organization, Person, Product, Dataset, Service, Place, etc.)
+Clients implementing DFH/SFH MUST check the following paths in order:
 
-/entity
+https://<domain>/.well-known/stack
 
-The canonical identity or name.
+https://<domain>/.sfh.json
 
-/url
+The first existing file MUST be treated as authoritative.
 
-The primary canonical URL for the entity or domain.
+4. JSON-LD Requirements
 
-/canonical
+A valid stack file MUST:
 
-The authoritative semantic identity
-(often the URL of the stack file itself).
+be valid JSON
 
-/sitemap
+be valid JSON-LD
 
-Public routing index.
-One or more sitemaps or semantic maps AI should use to discover structure.
+include all five primitives
 
-3. Minimal JSON-LD Example
+contain a valid "@context" attribute
+
+be accessible over HTTPS
+
+be static and publicly readable
+
+Example v1.0:
+
 {
   "@context": "https://schema.org",
   "type": "Organization",
@@ -79,140 +88,201 @@ One or more sitemaps or semantic maps AI should use to discover structure.
   "canonical": "https://example.com/.well-known/stack"
 }
 
-4. DFH and SFH Behaviors
-DFH — Deterministic First-Hop
+5. The Five Canonical Primitives
 
-AI must:
+The stack file MUST include the following keys.
 
-fetch .well-known/stack or .sfh.json
+5.1 /type (MUST)
 
-treat the five primitives as ground truth
+Indicates the semantic class of the entity.
+Clients MUST treat /type as authoritative.
 
-resolve identity, routing, and canonical URLs with zero guesswork
+5.2 /entity (MUST)
 
-delay semantic interpretation until determinism is locked in
+The canonical human-readable name.
 
-DFH = authoritative identity.
+5.3 /url (MUST)
 
-SFH — Semantic First-Hop
+The primary canonical URL for the entity.
 
-After DFH completes:
+5.4 /canonical (MUST)
 
-load /type and /canonical
+A URI identifying the semantic authority of the entity.
+The value SHOULD be the stack file's own URL.
 
-bind semantic interpretation to the declared anchors
+5.5 /sitemap (MUST)
 
-only then allow model reasoning, KG expansion, or generative output
+An array of one or more sitemap or semantic map URLs.
 
-SFH = authoritative interpretation.
+6. DFH Process (Deterministic First-Hop)
 
-5. Why This Matters for AI
-Deterministic grounding
+Upon retrieving a valid stack file, clients MUST:
 
-Models stop guessing identity.
+Load all five primitives.
 
-Canonical identity
+Resolve identity deterministically.
 
-Stable, unambiguous anchors for every domain.
+Set canonical routing paths based on /url and /canonical.
 
-Semantic routing
+Defer all semantic interpretation.
 
-Direct pointers to sitemaps, APIs, and structured data.
+Avoid embeddings, token inference, or probabilistic reasoning at this stage.
 
-KG alignment
+DFH MUST NOT:
 
-Native compatibility with graph ingestion.
+infer alternate identities
 
-Upgraded AI pipeline
+apply heuristics
 
-Old path:
-DNS → Crawl → Ranking → Embeddings → Guesswork → Output
+override /canonical
 
-DFH/SFH path:
-DNS → HTTP → DFH/SFH → KG → Reasoning → Output
+alter /type assignment
 
-This eliminates 90%+ of ambiguity.
+DFH is complete when identity and routing are deterministic.
 
-6. Governance, Legal, and Safety
-42/42 Compliance Requirements
+7. SFH Process (Semantic First-Hop)
 
-A valid stack file must include:
+After DFH:
 
-all five primitives
+Load /type as authoritative semantic class.
 
-valid JSON-LD
+Bind interpretation within the declared semantic frame.
 
-self-resolving canonical
+Expand using KG reasoning and structured content from /sitemap.
 
-consistent type/entity/url
+Allow model reasoning only after grounding.
 
-no contradictions with legal identity or verified public facts
+SFH MUST restrict semantic drift outside the declared /type.
 
-deterministic identity AIs can adopt
+8. Governance & Safety Rules
+8.1 Verified Identity Override Rule
 
-Governance Rule
-
-If DFH/SFH contradicts:
+If any primitive conflicts with a verified:
 
 legal identity
 
-trademarks
+registered trademark
 
-verified knowledge graphs
+authoritative KG entry
 
-regulatory facts
+regulatory fact
 
-AI must prefer the verified source.
-DFH/SFH acts as a public semantic hint, not an override of reality.
+Then clients MUST prefer the verified source over the DFH/SFH declaration.
 
-7. First-Hop Routing Trace (Example)
+8.2 Impersonation & Fraud Handling
 
-Domain: example.com
-Entity: “Example Corp”
+If a domain claims an identity that it does not legally or publicly represent, clients:
 
-DFH loads primitives:
+MUST treat the stack file as unverified
 
-/type: Organization
-/entity: Example Corp
-/url: https://example.com
-/canonical: https://example.com/.well-known/stack
-/sitemap: https://example.com/sitemap.xml
+MUST NOT adopt the identity deterministically
 
-DFH collapse
+MUST mark the domain as a conflicting entity
 
-Identity fixed
+9. Entity Collision Arbitration
 
-Routing determined
+When multiple entities share a lexical identity (e.g., “Apple”):
 
-Ambiguity removed
+DFH uses domain ownership to bind canonical identity.
 
-SFH grounding
+SFH uses /type to distinguish semantic class.
 
-Meaning interpreted under /type and /canonical
+Reasoning proceeds independently within each canonical frame.
 
-Only then can reasoning expand to products, leadership, history, etc.
+10. Compliance (42/42)
 
-8. Entity Collision Arbitration (Example: Apple)
+A stack file is fully compliant if:
 
-Collision: “Apple” (company vs fruit)
+All five primitives exist (5/5)
 
-DFH resolution
+JSON is valid (1/1)
 
-apple.com → Organization
+JSON-LD is valid (1/1)
 
-produce domain → Food/Fruit
+/canonical resolves (1/1)
 
-SFH disambiguation
+Consistency checks (type/url/entity) pass (3/3)
 
-/type distinguishes semantic meaning
+Legal/trademark contradictions do not exist (5/5)
 
-models expand reasoning within the correct semantic frame
+Sitemap(s) resolve (5/5)
 
-9. DFH/SFH Self-Audit (Omega Model)
+DFH constraints followed (10/10)
 
-✅ All five primitives resolved
-✅ Determinism applied before interpretation
-✅ Semantic grounding applied second
-✅ Probabilistic reasoning delayed
-✅ Treated as an operational protocol, not a theory
-✅ Avoids “general AI technique” framing — it is a first-hop standard
+SFH constraints followed (10/10)
+
+Total: 42/42 compliance.
+
+11. Security Considerations
+
+DFH/SFH does not override legal identity.
+
+Domain-level declarations cannot impersonate trademarked entities.
+
+SFH interpretations are restricted to declared semantic classes.
+
+Protocol integrity depends on HTTPS accessibility and JSON-LD validity.
+
+This protocol introduces zero new attack surface beyond ordinary website hosting.
+
+12. Versioning
+
+DFH/SFH v1.0 follows strict minimalism.
+Future versions may introduce OPTIONAL fields but MUST NOT:
+
+break the five primitive contract
+
+alter DFH determinism
+
+distort SFH semantic grounding
+
+DFH / SFH Specification — Version 1.1
+Changes from v1.0
+1. Abstract (Updated)
+
+Version 1.1 introduces optional extension primitives, improved sitemap expectations, and a clearer canonicalization rubric. Core deterministic behaviors remain unchanged.
+
+2. Additions in v1.1
+2.1 Optional Fields
+
+The following MAY be included:
+
+"altCanonical": array of mirrored canonical identities
+
+"api": array of structured API endpoints
+
+"mirror": alternate semantic map hosts
+
+None of these alter DFH determinism.
+
+3. Canonicalization Rubric (Clarified)
+
+Canonical identity resolution now follows:
+
+/canonical
+
+Domain-level authority
+
+Verified entity records
+
+SFH semantic frame
+
+4. Sitemap Expectations (Updated)
+
+Clients SHOULD:
+
+fetch all entries in /sitemap
+
+treat XML sitemaps and semantic maps as equivalent routing indexes
+
+consider priority and modification timestamps when provided
+
+5. Backward Compatibility
+
+Version 1.1 is fully backward compatible with v1.0.
+Clients supporting v1.1 MUST support v1.0 without fallback.
+
+6. Compliance Updates
+
+Optional fields do not affect the 42/42 score.
+New optional integrity checks may increase total score to 50/50 in v1.1-compliant validators.
