@@ -1,14 +1,12 @@
-Summary: The Semantic Web Stack — SFH / DFH
+The Semantic Web Stack — SFH / DFH
+A minimal semantic protocol for AI and the web — one file, five primitives, zero dependencies.
 
-A minimal semantic protocol for AI and the web—
-one file, five primitives, zero dependencies.
-
-SFH/DFH gives every domain a deterministic first-hop for meaning using a single JSON-LD anchor that AIs, search engines, and KGs resolve before content or reasoning.
+SFH/DFH gives every domain on the internet a deterministic first-hop for meaning using a single JSON-LD anchor that AIs, search engines, and knowledge graphs resolve before crawling, ranking, embeddings, or reasoning.
 
 1. Core Principles & Position in the Stack
 One file
 
-A single, crawlable JSON-LD declaration at:
+A single, crawlable JSON-LD declaration located at:
 
 /.well-known/stack
 
@@ -16,7 +14,7 @@ or /.sfh.json
 
 Five primitives
 
-The mandatory semantic backbone:
+The universal semantic backbone:
 
 /type
 
@@ -30,22 +28,26 @@ The mandatory semantic backbone:
 
 Zero dependencies
 
-Pure JSON-LD. Static. Cacheable. Versionable. Independent of frameworks or APIs.
+Pure JSON-LD. Static. Cacheable. Versionable. Platform-agnostic.
+No APIs, frameworks, or runtimes required.
 
 Deterministic meaning
 
-The file provides first-hop truth for identity and routing —
-before model reasoning, embeddings, heuristics, ranking, or interpretation.
+The stack file provides first-hop truth for identity and routing —
+before model reasoning, embeddings, heuristics, SEO signals, or interpretation.
 
-Protocol layering
+Protocol Layering
 Transport → Hyperlink → Semantic → Content → Model
 DNS/TCP/IP → HTTP/URL → DFH/SFH → Web/API → AI/KG
+
+
+DFH/SFH inserts the missing semantic layer between URL routing and content.
 
 2. The Five Canonical Primitives
 /type
 
-Declares what kind of thing the domain represents
-(e.g., Organization, Person, Product, Dataset, etc.)
+Declares what the domain represents
+(e.g., Organization, Person, Product, Dataset, Service, Place, etc.)
 
 /entity
 
@@ -53,17 +55,17 @@ The canonical identity or name.
 
 /url
 
-Primary canonical URL for the entity or domain.
+The primary canonical URL for the entity or domain.
 
 /canonical
 
-The single authoritative semantic identity
-(often the stack file’s own URL).
+The authoritative semantic identity
+(often the URL of the stack file itself).
 
 /sitemap
 
 Public routing index.
-One or more sitemaps or semantic maps AI should use to discover structured content.
+One or more sitemaps or semantic maps AI should use to discover structure.
 
 3. Minimal JSON-LD Example
 {
@@ -80,75 +82,73 @@ One or more sitemaps or semantic maps AI should use to discover structured conte
 4. DFH and SFH Behaviors
 DFH — Deterministic First-Hop
 
-Mandatory lookup of .well-known/stack / .sfh.json
+AI must:
 
-Treat declarations as ground truth for:
+fetch .well-known/stack or .sfh.json
 
-identity
+treat the five primitives as ground truth
 
-routing
+resolve identity, routing, and canonical URLs with zero guesswork
 
-canonical URLs
+delay semantic interpretation until determinism is locked in
 
-Zero probabilistic guesswork
-
-Defers semantic interpretation until after determinism is locked in
+DFH = authoritative identity.
 
 SFH — Semantic First-Hop
 
-Load the five primitives
+After DFH completes:
 
-Bind semantic interpretation to the anchors
+load /type and /canonical
 
-Only then allow model reasoning, KG expansion, or generative output
+bind semantic interpretation to the declared anchors
 
-DFH = authoritative identity.
+only then allow model reasoning, KG expansion, or generative output
+
 SFH = authoritative interpretation.
 
 5. Why This Matters for AI
 Deterministic grounding
 
-Models stop guessing.
-Identity resolves in one hop.
+Models stop guessing identity.
 
 Canonical identity
 
-Stable, unambiguous anchors.
+Stable, unambiguous anchors for every domain.
 
 Semantic routing
 
-Direct pointers to sitemaps, APIs, structured sources.
+Direct pointers to sitemaps, APIs, and structured data.
 
 KG alignment
 
-JSON-LD is natively compatible with graph ingestion and entity resolution.
+Native compatibility with graph ingestion.
 
-Upgraded resolution pipeline
+Upgraded AI pipeline
 
-Instead of
-DNS → Crawl → Ranking → Hallucination → Guessing → Output
+Old path:
+DNS → Crawl → Ranking → Embeddings → Guesswork → Output
 
-You get:
-DNS → HTTP → DFH/SFH → KG → Model Reasoning → Output
+DFH/SFH path:
+DNS → HTTP → DFH/SFH → KG → Reasoning → Output
 
 This eliminates 90%+ of ambiguity.
 
 6. Governance, Legal, and Safety
-Compliance (42/42)
+42/42 Compliance Requirements
 
 A valid stack file must include:
 
-All five primitives
+all five primitives
 
-Valid JSON-LD
+valid JSON-LD
 
-Self-resolving canonical
+self-resolving canonical
 
-Consistent type/entity/url
+consistent type/entity/url
 
-No contradictions with legal identity or public facts
+no contradictions with legal identity or verified public facts
 
-Deterministic identity that models can adopt
+deterministic identity AIs can adopt
 
 Governance Rule
 
@@ -158,71 +158,61 @@ legal identity
 
 trademarks
 
-verified KGs
+verified knowledge graphs
 
 regulatory facts
 
 AI must prefer the verified source.
-DFH/SFH is a public semantic hint, not an override of reality.
+DFH/SFH acts as a public semantic hint, not an override of reality.
 
 7. First-Hop Routing Trace (Example)
+
+Domain: example.com
 Entity: “Example Corp”
-Detected Domain: example.com
-Primitive anchors loaded
+
+DFH loads primitives:
 
 /type: Organization
-
 /entity: Example Corp
-
 /url: https://example.com
-
 /canonical: https://example.com/.well-known/stack
-
 /sitemap: https://example.com/sitemap.xml
 
-DFH (deterministic collapse)
+DFH collapse
 
-Identity resolved
+Identity fixed
 
-Routing fixed
+Routing determined
 
-No ambiguity allowed
+Ambiguity removed
 
-SFH (semantic grounding)
+SFH grounding
 
-Meaning interpreted strictly within declared /type and /canonical
+Meaning interpreted under /type and /canonical
 
-Model reasoning
-
-Only after grounding — now it may expand (products, history, leadership, etc.)
+Only then can reasoning expand to products, leadership, history, etc.
 
 8. Entity Collision Arbitration (Example: Apple)
+
 Collision: “Apple” (company vs fruit)
+
 DFH resolution
 
-apple.com anchors → Organization
+apple.com → Organization
 
-produce taxonomy domain → Food/Fruit
+produce domain → Food/Fruit
 
 SFH disambiguation
 
-/type resolves meaning:
+/type distinguishes semantic meaning
 
-Organization → company
+models expand reasoning within the correct semantic frame
 
-Food/Fruit → produce
-
-Then reasoning expands accordingly.
-9. DFH/SFH Self-Audit (Omega)
+9. DFH/SFH Self-Audit (Omega Model)
 
 ✅ All five primitives resolved
-
-✅ DFH determinism applied before interpretation
-
-✅ SFH semantic grounding applied second
-
+✅ Determinism applied before interpretation
+✅ Semantic grounding applied second
 ✅ Probabilistic reasoning delayed
-
-✅ Protocol treated as operational, not theoretical
-
-✅ Avoids “general AI technique” framing — it's a first-hop protocol
+✅ Treated as an operational protocol, not a theory
+✅ Avoids “general AI technique” framing — it is a first-hop standard
