@@ -1,46 +1,60 @@
-The Semantic Web Stack — Semantic First-Hop / Deterministic First-Hop (SFH / DFH)
-
+The-Semantic-Web-Stack — Semantic First-Hop / Deterministic First-Hop (SFH / DFH)
 A minimal semantic protocol for AI and the web — one file, five primitives, zero dependencies.
+
 DFH/SFH provides a deterministic first-hop for meaning using JSON-LD to create a public semantic layer that AIs and search engines resolve before content.
 
+🌐 The Semantic Web Stack (SFH / DFH)
+Core Principles
+
+One file
+
+Five primitives
+
+Zero dependencies
+
+Pure JSON-LD
+
+Deterministic meaning
+
 This is the smallest possible solution to one of the hardest problems in AI:
+
 semantic grounding.
 
 This project is not affiliated with Google, Amazon, OpenAI, DeepMind, Microsoft, or any third-party organization.
-This is a modern implementation of Tim Berners-Lee’s Semantic Web map — rebuilt for AI.
+It is a modern, minimal implementation of Tim Berners-Lee’s Semantic Web vision — rebuilt for AI systems.
 
-🌐 What is DFH / SFH?
+🧠 What is DFH / SFH?
 DFH — Deterministic First-Hop
 SFH — Semantic First-Hop
 
-Together, they define a deterministic, machine-perfect public semantic layer that sits between DNS/HTTP and content:
+Together, they define a public semantic layer that sits between DNS/HTTP and web content, giving every domain a deterministic meaning root.
 
-Transport Layer → DNS, TCP/IP  
-Hyperlink Layer → HTTP, URL  
-Semantic Layer → DFH / SFH  
-Content Layer  → Web pages, APIs, datasets  
-Model Layer    → AI systems, KG pipelines
+Transport Layer   → DNS, TCP/IP  
+Hyperlink Layer   → HTTP, URL  
+Semantic Layer    → DFH/SFH  
+Content Layer     → Web pages, APIs, datasets  
+Model Layer       → AI systems, KG pipelines  
 
 
-Instead of guessing what a domain “means,” AI resolves one file:
+Instead of guessing what a domain “means,” AIs resolve one file:
 
 https://yourdomain.com/.well-known/stack
 
 
-or
+or the alternative:
 
 https://yourdomain.com/.sfh.json
 
 
-That single declaration exposes five canonical primitives.
+That single file exposes five canonical primitives.
 
 🧱 The Five Canonical Primitives
 Primitive	Description
-type	What kind of thing the domain represents (Organization, Person, Product, System…)
-entity	The canonical identity / name of the domain
+type	What kind of thing the domain represents (Organization, Person, Product…)
+entity	The canonical identity/name of the domain
 url	The primary canonical URL
 sitemap	One or more sitemaps or semantic maps
-canonical	The single authoritative semantic identity of the declaration
+canonical	The authoritative semantic identity (usually the DFH/SFH file itself)
 Minimal Example
 {
   "@context": "https://schema.org",
@@ -55,37 +69,37 @@ Minimal Example
 
 🚦 Why This Matters for AI
 
-DFH/SFH gives AI systems:
+DFH/SFH provides:
 
-Deterministic grounding — one authoritative place to resolve meaning
+Deterministic grounding — one place to resolve meaning
 
-Canonical identity — removes ambiguity and hallucination paths
+Canonical identity — eliminates semantic guessing
 
-Semantic routing — directs models and KGs where structured data lives
+Semantic routing — where to look for structured content
 
 Stability — static, cacheable, versionable
 
-JSON-LD compatibility — integrates directly into KG workflows
+JSON-LD compatibility — maps into knowledge graphs with zero friction
 
-Resolution becomes:
+The new AI resolution pipeline becomes:
 
 DNS → HTTP → DFH/SFH → KG → Model Reasoning
 
 
-instead of:
+Instead of:
 
-DNS → HTTP → Crawl everything → Infer → Hallucinate semantics
+DNS → HTTP → Crawl everything → Hallucinate semantics
 
 
-This flips the entire industry from semantic guesswork to semantic determinism.
+This is why your protocol hits so hard — it solves the first-hop problem every model struggles with.
 
-✅ DFH/SFH Compliance (42/42)
+✅ Compliance (42/42)
 
-A domain is considered fully compliant if:
+A domain is DFH/SFH compliant if:
 
-A file exists at /.well-known/stack or /.sfh.json
+File exists at /.well-known/stack or /.sfh.json
 
-JSON is valid and well-formed
+JSON is valid
 
 JSON-LD is valid (recommended)
 
@@ -93,35 +107,35 @@ All five primitives are present
 
 canonical resolves to itself
 
-type, entity, and url are consistent
+type, entity, url are consistent
 
-No conflict with legal or verified KG identity
+No conflict with legal or verified identity
 
-Declarations are deterministic and unambiguous
+Meaning is deterministic and unambiguous
 
-Perfect compliance score: 42 / 42
+Perfect score: 42/42
 
-A CLI harness computes this automatically (see SPEC.md).
+A CLI harness can compute this (see SPEC.md).
 
 🛡️ Safety & Governance
 
-All DFH/SFH declarations operate under:
+All DFH/SFH declarations are bound by:
 
-Verified legal identity
+Legal identity
 
 Trademark ownership
 
-Knowledge graph consistency
+Verified knowledge graphs
 
 Regulatory constraints
 
-Publicly verifiable facts
+Publicly verified facts
 
-If a DFH/SFH file contradicts real-world verified identity, systems MUST:
+If a DFH/SFH file contradicts these, consumers must:
 
 Prefer the verified source
 
-Treat DFH/SFH as untrusted for that domain
+Treat the DFH/SFH file as untrusted
 
 This prevents:
 
@@ -131,16 +145,17 @@ Impersonation
 
 Disinformation
 
-Semantic hijacking
+DFH/SFH is a public semantic hint, not an override of legal reality.
 
-DFH/SFH is a public semantic hint, not a legal override.
+📄 Spec
 
-📄 Specification
+Full protocol defined in:
 
-See SPEC.md — DFH/SFH Protocol Specification v1.1
+SPEC.md — DFH/SFH Protocol Specification v1.1
+
 Public Semantic Layer (PSL) — Draft Standard
 
-Includes:
+Contains:
 
 Formal definitions
 
@@ -148,14 +163,13 @@ Deterministic resolution rules
 
 Safety override semantics
 
-Optional extensions (aliases, mirrors, semantic routes)
+Extension fields (mirrors, aliases, routes)
 
-Full 42-point compliance checklist
+42-point compliance checklist
 
-Reference implementation guidelines
+Suggested reference implementation
 
 🔧 Roadmap
-
 Planned:
 
 Node.js compliance harness (dfh-compliance)
@@ -168,7 +182,7 @@ Fortune 500
 
 Open-source projects
 
-Creators & personal domains
+Creators / personal sites
 
 Integration guides for:
 
@@ -182,8 +196,7 @@ Search engines
 
 📜 License
 
-MIT License.
-Free to use, fork, modify, and embed in any system.
+MIT License — free to use, fork, modify, embed.
 
 🙏 Attribution
 
@@ -195,12 +208,12 @@ A minimal upgrade to the Semantic Web
 
 A public grounding map for AI systems
 
-Not affiliated with any organization.
+Not affiliated with any company or institution.
 
-Correct SPEC Header (paste into SPEC.md)
+✅ SPEC.md Header (Copy/Paste)
 # DFH / SFH PROTOCOL — SPEC v1.1
 _Public Semantic Layer (PSL) — Draft Standard_
 
-> This work is not affiliated with Google, Amazon, OpenAI, DeepMind, Microsoft, or any third-party organization.
-> DFH/SFH is an independent, decentralized semantic protocol.
-> Safety and systemic coherence always override deterministic claims.
+> **This work is not affiliated with Google, Amazon, OpenAI, DeepMind, Microsoft, or any third-party organization.**
+> **DFH/SFH is an independent, decentralized semantic protocol.**
+> **Safety and systemic coherence always override deterministic claims.**
